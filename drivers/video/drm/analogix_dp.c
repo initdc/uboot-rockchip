@@ -807,12 +807,13 @@ static int analogix_dp_connector_init(struct display_state *state)
 	struct analogix_dp_device *dp = dev_get_priv(conn_state->dev);
 	struct video_info *video = &dp->video_info;
 	struct rockchip_panel *panel = state_get_panel(state);
+	unsigned int bpc = panel ? panel->bpc : 8;
 
 	conn_state->type = DRM_MODE_CONNECTOR_eDP;
 	conn_state->output_mode = ROCKCHIP_OUT_MODE_AAAA;
 	conn_state->color_space = V4L2_COLORSPACE_DEFAULT;
 
-	switch (panel->bpc) {
+	switch (bpc) {
 	case 12:
 		video->color_depth = COLOR_12;
 		break;
